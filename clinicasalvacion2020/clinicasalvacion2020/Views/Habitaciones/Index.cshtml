@@ -1,45 +1,49 @@
 ﻿@model IEnumerable<clinicasalvacion2020.Models.Habitaciones>
 
-@{
-    ViewBag.Title = "Index";
-}
+<h2 class="text-center"><b>Registro de Habitaciones</b></h2>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
+<br />
+<p class="text-center">
+    @Html.ActionLink("Registrar una nueva Habitacion", "Create", "Habitaciones", new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.numero)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.precio)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.numero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
+<table class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+    <th>
+        @Html.DisplayNameFor(model => model.numero)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.tipo)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.precio)
+    </th>
+    <th>
+        Acciones
+    </th>
     </tr>
-}
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Habitaciones", new { id = item.id }, htmlAttributes: new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Detalle", "Details", "Habitaciones", new { id = item.id }, htmlAttributes: new { @class = "btn btn-info" })
+                    @Html.ActionLink("Eliminar", "Delete", "Habitaciones", new { id = item.id }, htmlAttributes: new { @class = "btn btn-danger" })
 
+
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

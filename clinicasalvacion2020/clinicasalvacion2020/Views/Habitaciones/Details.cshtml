@@ -7,36 +7,43 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Habitaciones</h4>
+    <h4 class="text-center">Destalle Habitacion</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
+    <dl class="mx-auto d-block dl-horizontal">
+        <dt class="text-center">
             @Html.DisplayNameFor(model => model.numero)
         </dt>
 
-        <dd>
+        <dd class="text-center">
             @Html.DisplayFor(model => model.numero)
         </dd>
 
-        <dt>
+        <dt class="text-center">
             @Html.DisplayNameFor(model => model.tipo)
         </dt>
 
-        <dd>
+        <dd class="text-center">
             @Html.DisplayFor(model => model.tipo)
         </dd>
 
-        <dt>
+        <dt class="text-center">
             @Html.DisplayNameFor(model => model.precio)
         </dt>
 
-        <dd>
+        <dd class="text-center">
             @Html.DisplayFor(model => model.precio)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="row">
+    <div class="col-sm-6 mx-auto d-block">
+        @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
+    </div>
+
+
+    <div class="col-sm-6">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id })
+    </div>
+</div>
