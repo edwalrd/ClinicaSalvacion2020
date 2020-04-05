@@ -1,0 +1,61 @@
+﻿@model clinicasalvacion2020.Models.Pacientes
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que quieres elimar este paciente?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal text-xl-center">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.asegurados)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.asegurados)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions ">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
+                </div>
+
+                <div class="col-sm-6">
+
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

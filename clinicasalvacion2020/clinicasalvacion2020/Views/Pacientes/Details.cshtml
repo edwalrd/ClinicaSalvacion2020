@@ -1,0 +1,52 @@
+﻿@model clinicasalvacion2020.Models.Pacientes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h4 class="text-center">Destalle Pacientes</h4>
+    <hr />
+    <dl class="mx-auto d-block dl-horizontal">
+        <dt class="text-center">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd class="text-center">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt class="text-center">
+            @Html.DisplayNameFor(model => model.cedula)
+        </dt>
+
+        <dd class="text-center">
+            @Html.DisplayFor(model => model.cedula)
+        </dd>
+
+        <dt class="text-center">
+            @Html.DisplayNameFor(model => model.asegurados)
+        </dt>
+
+        <dd class="text-center">
+            @Html.DisplayFor(model => model.asegurados)
+        </dd>
+
+    </dl>
+</div>
+
+
+<div class="row">
+
+    <div class="col-sm-6 mx-auto d-block">
+        @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
+    </div>
+
+
+    <div class="col-sm-6">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id })
+    </div>
+
+</div>
+

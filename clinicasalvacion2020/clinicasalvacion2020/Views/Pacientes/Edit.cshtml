@@ -1,0 +1,63 @@
+﻿@model clinicasalvacion2020.Models.Pacientes
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+
+    <div class="card mx-auto d-block" style="width: 68%;">
+        <div class="card-header  text-center">
+            <h5 class="display-4">Edidar Pacientes</h5>
+        </div>
+
+        <div class="card-body mx-auto d-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.cedula, htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" } })
+                    @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.asegurados, htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EnumDropDownListFor(model => model.asegurados, htmlAttributes: new { @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" })
+                    @Html.ValidationMessageFor(model => model.asegurados, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="card-footer text-muted">
+
+                <div class="col-md-offset-2 col-md-10 mx-auto d-block">
+                    <input type="submit" value="Editar" class="btn btn-primary mx-auto d-block btn-default" style="width: 20%;" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

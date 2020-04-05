@@ -1,0 +1,51 @@
+﻿@model IEnumerable<clinicasalvacion2020.Models.Pacientes>
+
+
+<h2 class="text-center"><b>Registro de Pacientes</b></h2>
+
+<br />
+<p class="text-center">
+    @Html.ActionLink("Registrar un nuevo Paciente", "Create", "Pacientes", new { @class = "btn btn-primary" })
+</p>
+
+
+<table class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.asegurados)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.asegurados)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", "Pacientes", new { id = item.id }, htmlAttributes: new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Detalle", "Details", "Pacientes", new { id = item.id }, htmlAttributes: new { @class = "btn btn-info" })
+                    @Html.ActionLink("Eliminar", "Delete", "Pacientes", new { id = item.id }, htmlAttributes: new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
