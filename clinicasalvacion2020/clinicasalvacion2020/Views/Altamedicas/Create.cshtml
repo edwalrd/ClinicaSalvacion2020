@@ -1,0 +1,173 @@
+﻿@model clinicasalvacion2020.Models.Altamedicas
+
+    <div class="form-horizontal">
+        <h4 class="text-center">Altamédica</h4>
+        <hr />
+
+        <button class="btn btn-primary" onclick="Ver();">ver</button>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+
+                @Html.DropDownList("ingresoid", null, htmlAttributes: new { @id = "ingresoid", @class = "form-control" })
+
+                <br />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nombrep, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        <input class="form-control" id="nombrep" name="nombrep" />
+
+                        @Html.ValidationMessageFor(model => model.nombrep, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaingreso, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        <input class="form-control" type="date" name="fechaingreso" id="fechaingreso" />
+
+                        @Html.ValidationMessageFor(model => model.fechaingreso, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.habitacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+
+
+                        <input class="form-control" id="habitacion" name="habitacion" />
+
+                        @Html.ValidationMessageFor(model => model.habitacion, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechasalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fechasalida, new { htmlAttributes = new { @type = "date", @id = "fechasalida", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fechasalida, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+
+            </div>
+
+        }
+
+        <input id="valor" name="valor" style="display:none;" />
+
+
+        <button class="btn btn-warning" onclick="limpiar();">Limpiar</button>
+
+        <script>
+
+        function limpiar() {
+
+            document.getElementById("nombrep").value = "";
+            document.getElementById("fechaingreso").value = "";
+            document.getElementById("habitacion").value = "";
+            document.getElementById("fechasalida").value = "";
+            document.getElementById("monto").value = "";
+
+        }
+
+
+        </script>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="http://momentjs.com/downloads/moment.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            <script>
+        function Ver() {
+
+              var url = "@Url.Action("dataingreso", "Altamedicas")";
+                var ingresoid = $("#ingresoid").val();
+                var data = { ingresoid: ingresoid };
+            $.post(url, data).done(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#nombrep").val(data[i].nombre);
+                    $("#fechaingreso").val(data[i].fecha);
+                    $("#habitacion").val(data[i].numero);
+                    $("#valor").val(data[i].precio);
+                    $("#ingresoid").val(data[i].id_ingreso);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+
+        }
+
+
+    $("#fechasalida").change(function () {
+
+        var  inicio =  $("#fechaingreso").val();
+
+            var fin = $("#fechasalida").val();
+
+          var f1 =   (moment(inicio).format('DD/MM/YYYY'));
+          var f2 =   (moment(fin).format('DD/MM/YYYY'));
+
+      var aFecha1 = f1.split('/');
+             var aFecha2 = f2.split('/');
+             var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+             var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+             var dif = fFecha2 - fFecha1;
+             var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+
+            console.log('Pasaron ' + dias + ' dias');
+
+            var monto = $("#valor").val();
+
+            console.log(dias+"   " + monto);
+
+              var monto_total = monto * dias ;
+
+            $("#monto").val(monto_total);
+
+});
+
+
+
+
+            </script>
+        }
+
