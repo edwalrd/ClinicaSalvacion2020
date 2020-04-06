@@ -4,60 +4,57 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-center"><b>Alta Medica</b></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<br />
+<p class="text-center">
+    @Html.ActionLink("Registrar de Alta", "Create", "Altamedicas", new { @class = "btn btn-primary mb-3" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingresos.fecha_inicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombrep)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaingreso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.habitacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechasalida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.monto)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingresos.fecha_inicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombrep)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaingreso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.habitacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechasalida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.monto)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+<table class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr>
 
+            <th>
+                @Html.DisplayNameFor(model => model.nombrep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaingreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.habitacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechasalida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.monto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombrep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaingreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.habitacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechasalida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.monto)
+                </td>
+
+            </tr>
+        }
+    </tbody>
 </table>
