@@ -1,0 +1,73 @@
+﻿@model clinicasalvacion2020.Models.Citas_Medicas
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+
+    <div class="card mx-auto d-block" style="width: 75%;">
+        <div class="card-header  text-center">
+            <h5 class="display-4">Crear Cita Medica</h5>
+        </div>
+
+        <div class="card-body mx-auto d-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @type = "date", @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.hora, htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EditorFor(model => model.hora, new { htmlAttributes = new { @type = "time", @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.hora, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.medicoid, "Medico", htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.DropDownList("medicoid", null, htmlAttributes: new { @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.medicoid, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group ml-lg-5 col-md-10 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.pacienteid, "Paciente", htmlAttributes: new { @class = "text-center" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.DropDownList("pacienteid", null, htmlAttributes: new { @style = "background-color:#f2f2f2", @class = "mx-auto d-block form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.pacienteid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="card-footer text-muted">
+
+            <div class="col-md-offset-2 col-md-10 mx-auto d-block">
+                <input type="submit" value="Crear" class="btn btn-primary mx-auto d-block btn-default" style="width: 20%;" />
+
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+<div>
+    @Html.ActionLink("Regresar", "Index", "Citas_Medicas", new { @class = "btn btn-danger" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
