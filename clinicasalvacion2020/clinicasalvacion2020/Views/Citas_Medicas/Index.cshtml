@@ -4,44 +4,49 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-center"><b>Citas Medicas</b></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<br />
+<p class="text-center">
+    @Html.ActionLink("Registrar Cita Medica", "Create", "Citas_Medicas", new { @class = "btn btn-primary mb-3" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Medico.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pacientes.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hora)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Medico.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pacientes.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hora)
-        </td>
-     
-    </tr>
-}
+<table class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Medico.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hora)
+            </th>
+         
+        </tr>
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medico.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pacientes.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hora)
+                </td>
+
+            </tr>
+        }
 
 </table>

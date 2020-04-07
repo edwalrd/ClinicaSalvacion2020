@@ -1,119 +1,117 @@
 ﻿@model clinicasalvacion2020.Models.Altamedicas
 
-    <div class="form-horizontal">
-        <h4 class="text-center">Altamédica</h4>
-        <hr />
-
-        <button class="btn btn-primary" onclick="Ver();">ver</button>
 
 
+<div class="card mx-auto d-block" style="width: 80%;">
+
+
+    <div class="card-header  text-center">
+        <h5 class="display-4">Alta Medica</h5>
+    </div>
+    <div class="card-body mx-auto d-block">
+        <div class="form-group  col-sm-12 mx-auto d-block text-center">
+
+            <button class="btn btn-primary" onclick="Ver();">ver</button>
+        </div>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
+            <div class="form-group  col-sm-12 mx-auto d-block text-center">
+                <label>ID de Paciente</label>
+            </div>
+            <div class="form-group  col-md-6 mx-auto d-block text-center">
+                @Html.DropDownList("ingresoid", null, htmlAttributes: new { @id = "ingresoid", @class = "form-control mx-auto ", @style = "background-color:#f2f2f2" })
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-
-                @Html.DropDownList("ingresoid", null, htmlAttributes: new { @id = "ingresoid", @class = "form-control" })
-
-                <br />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.nombrep, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                        <input class="form-control" id="nombrep" name="nombrep" />
-
-                        @Html.ValidationMessageFor(model => model.nombrep, "", new { @class = "text-danger" })
-
-                    </div>
+            <div class="form-group  col-sm-12 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.nombrep, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-sm-8 mx-auto d-block">
+                    <input class="form-control" id="nombrep" name="nombrep" style="background-color:#f2f2f2" />
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.fechaingreso, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                        <input class="form-control" type="date" name="fechaingreso" id="fechaingreso" />
-
-                        @Html.ValidationMessageFor(model => model.fechaingreso, "", new { @class = "text-danger" })
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.habitacion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-
-
-                        <input class="form-control" id="habitacion" name="habitacion" />
-
-                        @Html.ValidationMessageFor(model => model.habitacion, "", new { @class = "text-danger" })
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.fechasalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.fechasalida, new { htmlAttributes = new { @type = "date", @id = "fechasalida", @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.fechasalida, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
+                @Html.ValidationMessageFor(model => model.nombrep, "", new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+            <div class="form-group  col-sm-12 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.fechaingreso, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-sm-8 mx-auto d-block">
 
+                    <input class="form-control" type="date" name="fechaingreso" id="fechaingreso" style="background-color:#f2f2f2" />
+                </div>
+                @Html.ValidationMessageFor(model => model.fechaingreso, "", new { @class = "text-danger" })
             </div>
 
+            <div class="form-group  col-sm-12 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.habitacion, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-sm-8 mx-auto d-block">
+                    <input class="form-control" id="habitacion" name="habitacion" style="background-color:#f2f2f2" />
+                </div>
+                @Html.ValidationMessageFor(model => model.habitacion, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group  col-sm-12 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.fechasalida, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EditorFor(model => model.fechasalida, new { htmlAttributes = new { @type = "date", @id = "fechasalida", @class = "form-control", @style = "background-color:#f2f2f2" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.fechasalida, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group  col-sm-12 mx-auto d-block text-center">
+                @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-sm-8 mx-auto d-block">
+                    @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control", @style = "background-color:#f2f2f2" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="card-footer text-muted">
+                <div class="col-md-offset-2 col-md-10 mx-auto d-block">
+                    <input type="submit" value="Crear" class="btn btn-primary mx-auto d-block btn-default" style="width: 20%;" />
+                </div>
+            </div>
         }
-
-        <input id="valor" name="valor" style="display:none;" />
-
-
+    <div class="form-group  col-sm-12 ml-auto">
         <button class="btn btn-warning" onclick="limpiar();">Limpiar</button>
-
-        <script>
-
-        function limpiar() {
-
-            document.getElementById("nombrep").value = "";
-            document.getElementById("fechaingreso").value = "";
-            document.getElementById("habitacion").value = "";
-            document.getElementById("fechasalida").value = "";
-            document.getElementById("monto").value = "";
-
-        }
+    </div>
+    </div>
+</div>
+<input id="valor" name="valor" style="display:none;" />
 
 
-        </script>
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-        <script src="http://momentjs.com/downloads/moment.min.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-            <script>
+
+<script>
+
+    function limpiar() {
+
+        document.getElementById("nombrep").value = "";
+        document.getElementById("fechaingreso").value = "";
+        document.getElementById("habitacion").value = "";
+        document.getElementById("fechasalida").value = "";
+        document.getElementById("monto").value = "";
+
+    }
+
+
+</script>
+
+<div>
+    @Html.ActionLink("Regresar", "Index", "Altamedicas", new { @class = "btn btn-danger" })
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
         function Ver() {
 
               var url = "@Url.Action("dataingreso", "Altamedicas")";
@@ -168,6 +166,6 @@
 
 
 
-            </script>
-        }
+    </script>
+}
 
