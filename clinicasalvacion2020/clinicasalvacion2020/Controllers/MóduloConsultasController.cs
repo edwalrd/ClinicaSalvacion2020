@@ -89,12 +89,7 @@ namespace clinicasalvacion2020.Controllers
 
         }
 
-        public ActionResult imprimir_paciente()
-        {
-            var impri = new ActionAsPdf("pacinte");
-
-            return impri;
-        }
+      
         public JsonResult medico_json(string seleciona_medicos, string buscar_medico)
         {
 
@@ -132,12 +127,7 @@ namespace clinicasalvacion2020.Controllers
 
         }
 
-        public ActionResult imprimir_medico()
-        {
-            var impri_medico = new ActionAsPdf("medico");
-
-            return impri_medico;
-        }
+       
         public JsonResult json_habitacion(string seleciona_habitacion)
         {
 
@@ -186,12 +176,7 @@ namespace clinicasalvacion2020.Controllers
             return View(db.Habitaciones.ToList());
         }
 
-        public ActionResult imprimir_habitacion()
-        {
-            var impri_habitacion = new ActionAsPdf("habitacion");
-
-            return impri_habitacion;
-        }
+      
         public JsonResult json_citas_medicas(string seleciona_cita, string buscar_cita)
         {
 
@@ -265,12 +250,7 @@ namespace clinicasalvacion2020.Controllers
 
         }
 
-        public ActionResult imprimir_Médicas()
-        {
-            var impri_Médicas = new ActionAsPdf("Médicas");
-
-            return impri_Médicas;
-        }
+      
         public JsonResult json_ingreso(string seleciona_ingreso, string buscar_ingreso)
         {
 
@@ -322,12 +302,7 @@ namespace clinicasalvacion2020.Controllers
             return View(ingresos.ToList());
 
         }
-        public ActionResult imprimir_Ingresos()
-        {
-            var impri_Ingresos = new ActionAsPdf("Ingresos");
-
-            return impri_Ingresos;
-        }
+       
         public ActionResult Alta()
         {
 
@@ -394,12 +369,6 @@ namespace clinicasalvacion2020.Controllers
             return Json(all);
         }
 
-        public ActionResult imprimir_Alta()
-        {
-            var impri_Alta = new ActionAsPdf("Alta");
-
-            return impri_Alta;
-        }
 
 
     }
