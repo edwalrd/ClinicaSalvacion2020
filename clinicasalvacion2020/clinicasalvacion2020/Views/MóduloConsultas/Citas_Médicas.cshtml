@@ -1,0 +1,133 @@
+﻿@model IEnumerable<clinicasalvacion2020.Models.Citas_Medicas>
+
+@{
+    ViewBag.Title = "Citas_Médicas";
+}
+
+@Styles.Render("~/Content/tabla.css")
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<h2 class="text-center"><b>Citas Médicas</b></h2>
+
+
+@Html.ActionLink("Imprimir", "imprimir_Médicas")
+
+
+<section class="my-2 ">
+
+    <div class="row ">
+
+        <div class="col-sm-3 ">
+
+            <select class="form-control" id="seleciona_cita" name="seleciona_cita">
+
+                <option value="doctor">Doctor  </option>
+                <option value="paciente">Paciente   </option>
+                <option value="fecha">Fecha</option>
+
+            </select>
+
+        </div>
+        <div class="col-sm-3">
+            <input class="form-control" id="buscar_cita" name="buscar_cita" />
+
+        </div>
+
+        <div class="col-sm-3">
+            <button class="btn btn-success" onclick="busqueda_cita();">Busccar</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<table id="tabla_Cita" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+
+        <tr class="filters ">
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medico.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes.nombre)
+            </th>
+        </tr>
+
+
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hora)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medico.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pacientes.nombre)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        function busqueda_cita() {
+
+            var url = "@Url.Action("json_citas_medicas", "MóduloConsultas")";
+
+                var buscar_cita = $("#buscar_cita").val();
+                var seleciona_cita = $("#seleciona_cita").val();
+
+                var data = { buscar_cita:buscar_cita, seleciona_cita: seleciona_cita };
+
+            $.post(url, data).done(function (data) {
+
+                 $('#tabla_Cita tbody').empty();
+
+                for (var i = 0; i < data.length; i++) {
+
+                            var rows = "<tr>"
+                + "<td>" + data[i].fecha + "</td>"
+                 + "<td>" + data[i].hora+ "</td>"
+                 + "<td>" + data[i].medico+ "</td>"
+                 + "<td>" + data[i].paciente+ "</td>"
+
+
+                + "</tr>";
+                        $('#tabla_Cita tbody').append(rows);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+        }
+
+
+
+
+    </script>
+}
