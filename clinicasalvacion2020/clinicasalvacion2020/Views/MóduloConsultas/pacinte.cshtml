@@ -1,45 +1,131 @@
 ﻿@model IEnumerable<clinicasalvacion2020.Models.Pacientes>
 
 @{
-    ViewBag.Title = "pacinte";
+    ViewBag.Title = "paciente";
 }
+@Styles.Render("~/Content/tabla.css")
 
-<h2>pacinte</h2>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cedula)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.asegurados)
-        </th>
-        <th></th>
-    </tr>
+<h2 class="text-center"><b>Paciente</b></h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.asegurados)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
 
+@Html.ActionLink("Imprimir", "imprimir_paciente")
+
+
+
+<section class="my-2 ">
+
+    <div class="row ">
+
+        <div class="col-sm-3 ">
+
+            <select class="form-control" id="seleciona" name="seleciona" style="background-color:#e6e6e6">
+
+                <option value="nombre">Nombre</option>
+                <option value="cedula">Cedula </option>
+                <option value="0">Con asegurados  </option>
+                <option value="1">sin asegurados  </option>
+
+            </select>
+
+        </div>
+        <div class="col-sm-3">
+
+            <input class="form-control " style="background-color:#e6e6e6" id="buscar" name="buscar" />
+
+        </div>
+        <div class="col-sm-3">
+
+            <button class="btn btn-success" onclick="guardar();">Buscar</button>
+
+        </div>
+    </div>
+
+</section>
+
+<table id="blogTable" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.asegurados)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.asegurados)
+                </td>
+
+            </tr>
+        }
+    </tbody>
 </table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        function guardar() {
+
+            var url = "@Url.Action("pacinete_json", "MóduloConsultas")";
+
+                var buscar = $("#buscar").val();
+                var seleciona = $("#seleciona").val();
+
+                var data = { buscar:buscar, seleciona: seleciona };
+
+            $.post(url, data).done(function (data) {
+
+                 $('#blogTable tbody').empty();
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var repuesta;
+
+                    if (data[i].asegurados == 0) {
+                        repuesta = "si";
+                    } else if (data[i].asegurados == 1) {
+
+                      repuesta = "no";
+                    }
+
+                            var rows = "<tr>"
+                + "<td>" + data[i].cedula + "</td>"
+                 + "<td>" + data[i].nombre+ "</td>"
+                + "<td>" + repuesta  + "</td>"
+
+                + "</tr>";
+                        $('#blogTable tbody').append(rows);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+
+
+        }
+
+    </script>
+}
