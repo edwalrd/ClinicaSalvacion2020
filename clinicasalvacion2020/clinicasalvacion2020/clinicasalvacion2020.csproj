@@ -215,6 +215,7 @@
     <Content Include="Views\Altamedicas\Index.cshtml" />
     <Content Include="Views\MóduloConsultas\pacinte.cshtml" />
     <Content Include="Views\MóduloConsultas\medico.cshtml" />
+    <Content Include="Views\MóduloConsultas\habitacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

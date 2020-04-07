@@ -1,0 +1,132 @@
+﻿@model IEnumerable<clinicasalvacion2020.Models.Habitaciones>
+
+@{
+    ViewBag.Title = "habitacion";
+}
+
+@Styles.Render("~/Content/tabla.css")
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<h2 class="text-center"><b>Habitaciones</b></h2>
+
+
+
+<section class="my-2 ">
+
+    <div class="row ">
+
+        <div class="col-sm-3 ">
+
+            <select class="form-control" id="seleciona_habitacion" name="seleciona_habitacion">
+
+                <option value="doble">Doble</option>
+                <option value="privada">Privada</option>
+                <option value="suite">Suite</option>
+
+            </select>
+
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-success" onclick="busqueda_habitacion();">Buscar</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<table id="tabla_habitacion" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr class="filters ">
+            <th>
+                @Html.DisplayNameFor(model => model.numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        function busqueda_habitacion() {
+
+            var url = "@Url.Action("json_habitacion", "MóduloConsultas")";
+
+                var seleciona_habitacion = $("#seleciona_habitacion").val();
+
+                var data = {  seleciona_habitacion: seleciona_habitacion };
+
+            $.post(url, data).done(function (data) {
+
+                 $('#tabla_habitacion tbody').empty();
+
+                for (var i = 0; i < data.length; i++) {
+
+                      var repuesta;
+
+                    if (data[i].tipo == 0) {
+                        repuesta = "Doble";
+
+                    } else if (data[i].tipo == 1) {
+
+                      repuesta = "privada";
+                    }else if (data[i].tipo == 2) {
+
+                      repuesta = "suite";
+                    }
+
+                            var rows = "<tr>"
+                           + "<td>" + data[i].numero + "</td>"
+                           + "<td>" + repuesta+ "</td>"
+                           + "<td>" + data[i].precio+ "</td>"
+
+                + "</tr>";
+                        $('#tabla_habitacion tbody').append(rows);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+
+
+        }
+
+    </script>
+}
