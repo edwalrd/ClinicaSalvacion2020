@@ -9,6 +9,8 @@
 
 <h2 class="text-center"><b>Paciente</b></h2>
 
+
+
 <section class="my-5">
 
     <div class="row ">
@@ -37,56 +39,58 @@
 
         </div>
         <div class="col-sm-3">
-            <a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+            <button class="btn btn-danger" onclick="PDF();">PDF</button>
         </div>
-        </div>
+    </div>
 
 </section>
 
 
 
-<div id="HTMLtoPDF">
-    <table id="blogTable" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
-        <thead class="text-center table-dark">
+
+<table id="blogTable" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.asegurados)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.cedula)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.asegurados)
-                </th>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.asegurados)
+                </td>
 
             </tr>
-        </thead>
-        <tbody class="text-center table-light">
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
+        }
+    </tbody>
+</table>
 
-                        @Html.DisplayFor(modelItem => item.cedula)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.asegurados)
-                    </td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+
+
 
         function guardar() {
 
@@ -132,3 +136,17 @@
 
     </script>
 }
+<script>
+    function PDF() {
+        const element = document.getElementById("blogTable");
+        var opt = {
+            filename: 'reporte-paciente.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save();
+
+    }
+</script>

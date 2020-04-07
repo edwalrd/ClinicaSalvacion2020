@@ -37,12 +37,12 @@
             <button class="btn btn-success" onclick="busqueda_alta();">Busccar</button>
         </div>
         <div class="col-sm-3">
-            <a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+            <button class="btn btn-danger" onclick="PDF();">PDF</button>
         </div>
     </div>
 
 </section>
-<div id="HTMLtoPDF">
+
     <table id="tabla_Alta" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
         <thead class="text-center table-dark">
             <tr class="filters ">
@@ -90,7 +90,7 @@
             }
         </tbody>
     </table>
-</div>
+
 
 
 <button href="#demo" class="btn btn-primary" data-toggle="collapse" onclick="buscar();">Ver Estadisitcas</button>
@@ -197,3 +197,17 @@
 }
 
 
+<script>
+    function PDF() {
+        const element = document.getElementById("tabla_Alta");
+        var opt = {
+            filename: 'reporte-Altamedica.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save();
+
+    }
+</script>
