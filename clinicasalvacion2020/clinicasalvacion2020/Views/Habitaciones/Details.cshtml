@@ -1,10 +1,6 @@
 ﻿@model clinicasalvacion2020.Models.Habitaciones
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
 
 <div>
     <h4 class="text-center">Destalle Habitacion</h4>
@@ -38,12 +34,16 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-6 mx-auto d-block">
-        @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
+
+    <div class="col-sm-2 mx-auto d-block">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class = "btn btn-warning mx-auto d-block" })
     </div>
 
+</div>
 
-    <div class="col-sm-6">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id })
+
+<div class="row">
+    <div class="col-sm-6 ">
+        @Html.ActionLink("Regresar", "Index", "Habitaciones", new { @class = "btn btn-danger" })
     </div>
 </div>

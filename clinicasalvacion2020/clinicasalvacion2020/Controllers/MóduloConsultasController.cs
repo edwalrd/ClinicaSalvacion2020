@@ -183,6 +183,19 @@ namespace clinicasalvacion2020.Controllers
             if (buscar_cita == string.Empty)
             {
 
+                var resultado_cita_vacio = (from c in db.Citas_Medicas
+                                      join p in db.Pacientes on c.pacienteid equals p.id
+                                      join m in db.Medicos on c.medicoid equals m.id
+                                      select new
+                                      {
+                                          medico = m.nombre,
+                                          paciente = p.nombre,
+                                          fecha = c.fecha,
+                                          hora = c.hora
+                                      });
+
+                return Json(resultado_cita_vacio);
+
                 return Json(db.Citas_Medicas.ToList());
             }
 
@@ -257,7 +270,17 @@ namespace clinicasalvacion2020.Controllers
             if (buscar_ingreso == string.Empty)
             {
 
-                return Json(db.Ingresos.ToList());
+                var resultado_ingreso_vacio = (from i in db.Ingresos
+                                         join h in db.Habitaciones on i.habitacionesid equals h.id
+                                         join p in db.Pacientes on i.pacienteid equals p.id
+                                         select new
+                                         {
+                                             fecha = i.fecha_inicio,
+                                             paciente = p.nombre,
+                                             numero = h.numero
+                                         });
+
+                return Json(resultado_ingreso_vacio);
             }
 
 
@@ -368,7 +391,6 @@ namespace clinicasalvacion2020.Controllers
 
             return Json(all);
         }
-
 
 
     }

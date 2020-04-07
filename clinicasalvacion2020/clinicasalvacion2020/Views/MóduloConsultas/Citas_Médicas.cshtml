@@ -14,13 +14,13 @@
 
 
 
-<section class="my-2 ">
+<section class="my-5 ">
 
     <div class="row ">
 
         <div class="col-sm-3 ">
 
-            <select class="form-control" id="seleciona_cita" name="seleciona_cita">
+            <select class="form-control" id="seleciona_cita" name="seleciona_cita" style="background-color:#e6e6e6">
 
                 <option value="doctor">Doctor  </option>
                 <option value="paciente">Paciente   </option>
@@ -30,7 +30,7 @@
 
         </div>
         <div class="col-sm-3">
-            <input class="form-control" id="buscar_cita" name="buscar_cita" />
+            <input class="form-control" id="buscar_cita" name="buscar_cita" style="background-color:#e6e6e6"/>
 
         </div>
 
@@ -57,20 +57,18 @@
                         @Html.DisplayNameFor(model => model.hora)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Medico.nombre)
+                       Medico
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Pacientes.nombre)
+                       Paciente
                     </th>
                 </tr>
-
 
             </thead>
             <tbody class="text-center table-light">
                 @foreach (var item in Model)
                 {
                     <tr>
-
                         <td>
                             @Html.DisplayFor(modelItem => item.fecha)
                         </td>

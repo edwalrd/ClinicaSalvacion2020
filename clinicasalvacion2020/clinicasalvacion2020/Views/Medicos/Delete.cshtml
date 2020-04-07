@@ -6,7 +6,7 @@
 
 <h2>Eliminar</h2>
 
-<h3>Esta seguro que quieres elimar este Medico?</h3>
+<h3>Esta seguro que quieres eliminar este Medico?</h3>
 <div>
 
     <hr />
@@ -43,21 +43,23 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions ">
+<div class="form-actions ">
 
-            <div class="row">
+    <div class="row">
+        <div class="col-sm-2 mx-auto d-block">
 
-                <div class="col-sm-6">
-
-                    @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
-                </div>
-
-                <div class="col-sm-6">
-
-                    <input type="submit" value="Delete" class="btn btn-default" />
-                </div>
-            </div>
-
+            <input type="submit" value="Delete" class="btn btn-danger mx-auto d-block" />
         </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+
+            @Html.ActionLink("Regresar", "Index", "Pacientes", new { @class = "btn btn-danger" })
+        </div>
+    </div>
+
+</div>
     }
 </div>
