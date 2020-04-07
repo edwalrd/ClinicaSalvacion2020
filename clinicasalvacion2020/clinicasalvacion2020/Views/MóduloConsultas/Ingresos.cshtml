@@ -31,55 +31,57 @@
         </div>
         <div class="col-sm-3">
             <button class="btn btn-success" onclick="busqueda_ingreso();">Busccar</button>
-
+        </div>
+        <div class="col-sm-3">
+            <a href="#" onclick="HTMLtoPDF()">Download PDF</a>
         </div>
     </div>
 
 </section>
+<div id="HTMLtoPDF">
+    <table id="tabla_ingreso" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+        <thead class="text-center table-dark">
 
-<table id="tabla_ingreso" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
-    <thead class="text-center table-dark">
+            <tr class="filters ">
 
-        <tr class="filters ">
-
-            <th>
-                @Html.DisplayNameFor(model => model.fecha_inicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pacientes.nombre)
-            </th>
-            <th>
-             Habitacion
-            </th>
-        </tr>
-
-    </thead>
-    <tbody class="text-center table-light">
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.fecha_inicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pacientes.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Habitaciones.numero)
-                </td>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.fecha_inicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pacientes.nombre)
+                </th>
+                <th>
+                    Habitacion
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
 
+        </thead>
+        <tbody class="text-center table-light">
+            @foreach (var item in Model)
+            {
+                <tr>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha_inicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pacientes.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Habitaciones.numero)
+                    </td>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
 
         function busqueda_ingreso() {
 
@@ -114,5 +116,5 @@
 
 
 
-    </script>
-}
+        </script>
+    }

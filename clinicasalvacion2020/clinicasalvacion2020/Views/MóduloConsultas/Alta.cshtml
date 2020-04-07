@@ -8,6 +8,9 @@
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<link rel="stylesheet" href="~/Content/cards.css">
+
+
 <h2 class="text-center"><b>Alta Medica</b></h2>
 
 
@@ -33,107 +36,103 @@
         </div>
         <div class="col-sm-3">
             <button class="btn btn-success" onclick="busqueda_alta();">Busccar</button>
-
-
+        </div>
+        <div class="col-sm-3">
+            <a href="#" onclick="HTMLtoPDF()">Download PDF</a>
         </div>
     </div>
 
 </section>
+<div id="HTMLtoPDF">
+    <table id="tabla_Alta" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+        <thead class="text-center table-dark">
+            <tr class="filters ">
 
-<table id="tabla_Alta" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
-    <thead class="text-center table-dark">
-        <tr class="filters ">
-
-            <th>
-                @Html.DisplayNameFor(model => model.nombrep)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaingreso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechasalida)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.habitacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.monto)
-            </th>
-        </tr>
-
-    </thead>
-    <tbody class="text-center table-light">
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombrep)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaingreso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechasalida)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.habitacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.monto)
-                </td>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.nombrep)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fechaingreso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fechasalida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.habitacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.monto)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
 
-<section>
+        </thead>
+        <tbody class="text-center table-light">
+            @foreach (var item in Model)
+            {
+                <tr>
 
-    <button href="#demo" class="btn btn-primary" data-toggle="collapse" onclick="buscar();">Ver Estadisitcas</button>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombrep)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaingreso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechasalida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.habitacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.monto)
+                    </td>
 
-    <div id="demo" class=" collapse container">
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-        <div class="row ">
 
-            <div id="accordion">
-                <article>
-                    <h2>Sumatoria</h2>
+<button href="#demo" class="btn btn-primary" data-toggle="collapse" onclick="buscar();">Ver Estadisitcas</button>
 
-                    <p id="m_sumatoria"></p>
+<div id="demo" class=" collapse container" >
 
-                </article>
-                <article>
-                    <h2>Conteo</h2>
+    <div id="accordion" class="">
+        <article>
+            <h5 class="text-center">Sumatoria</h5>
 
-                    <p id="m_conteo"></p>
-                </article>
-                <article>
-                    <h2>Promedio</h2>
+            <p><strong id="m_sumatoria" class="text-center mx-auto d-block"></strong></p>
+        </article>
+        <article>
+            <h5 class="text-center">Conteo </h5>
 
-                    <p id="m_promedio"></p>
+            <p><strong id="m_conteo" class="text-center mx-auto d-block"></strong></p>
+        </article>
+        <article>
+            <h5 class="text-center">Promedio </h5>
 
-                </article>
-                <article>
-                    <h2>Monto Mayor</h2>
-
-                    <p id="m_mayor"></p>
-
-                </article>
-                <article>
-                    <h2>Monto Menor</h2>
-
-                    <p id="m_menor"></p>
-
-                </article>
-            </div>
-            <div style="clear:both;"></div>
-
-        </div>
+            <p><strong id="m_promedio" class="text-center mx-auto d-block"></strong></p>
+        </article>
+        <article>
+            <h5 class="text-center">Monto Mayor</h5>
+            <p><strong id="m_mayor" class="text-center mx-auto d-block"></strong></p>
+        </article> 
+        
+        <article>
+            <h5 class="text-center">Monto Menor</h5>
+            <p ><strong id="m_menor" class="text-center mx-auto d-block"></strong></p>
+        </article>
     </div>
-</section>
-<br />
-<br />
+    <div style="clear:both;"></div>
+    <div>
+        <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+
+
+    </div>
+</div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

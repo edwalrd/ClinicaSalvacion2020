@@ -9,14 +9,10 @@
 
 <h2 class="text-center"><b>Paciente</b></h2>
 
-
-@Html.ActionLink("Imprimir", "imprimir_paciente")
-
-
-
-<section class="my-2 ">
+<section class="my-4">
 
     <div class="row ">
+
 
         <div class="col-sm-3 ">
 
@@ -40,44 +36,51 @@
             <button class="btn btn-success" onclick="guardar();">Buscar</button>
 
         </div>
-    </div>
+        <div class="col-sm-3">
+            <a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+        </div>
+        </div>
 
 </section>
 
-<table id="blogTable" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
-    <thead class="text-center table-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cedula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.asegurados)
-            </th>
 
-        </tr>
-    </thead>
-    <tbody class="text-center table-light">
-        @foreach (var item in Model)
-        {
+
+<div id="HTMLtoPDF">
+    <table id="blogTable" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+        <thead class="text-center table-dark">
             <tr>
-                <td>
-
-                    @Html.DisplayFor(modelItem => item.cedula)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.asegurados)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cedula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.asegurados)
+                </th>
 
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody class="text-center table-light">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.asegurados)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
