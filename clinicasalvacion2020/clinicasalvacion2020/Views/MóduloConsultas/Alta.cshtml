@@ -1,0 +1,202 @@
+﻿@model IEnumerable<clinicasalvacion2020.Models.Altamedicas>
+
+@{
+    ViewBag.Title = "Alta";
+}
+
+
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<h2 class="text-center"><b>Alta Medica</b></h2>
+
+
+
+<section class="my-2 ">
+
+    <div class="row ">
+
+        <div class="col-sm-3 ">
+
+            <select class="form-control" id="seleciona_altamedica" name="seleciona_altamedica">
+
+                <option value="paciente">Nombre de paciente</option>
+                <option value="fecha_ingreso">Fecha de Ingreso</option>
+                <option value="fecha_salida">Fecha de Alta</option>
+            </select>
+
+        </div>
+        <div class="col-sm-3">
+
+            <input class="form-control" id="buscar_altamedica" name="buscar_altamedica" />
+
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-success" onclick="busqueda_alta();">Busccar</button>
+
+
+        </div>
+    </div>
+
+</section>
+
+<table id="tabla_Alta" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+        <tr class="filters ">
+
+            <th>
+                @Html.DisplayNameFor(model => model.nombrep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaingreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechasalida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.habitacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.monto)
+            </th>
+        </tr>
+
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombrep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaingreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechasalida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.habitacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.monto)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<section>
+
+    <button href="#demo" class="btn btn-primary" data-toggle="collapse" onclick="buscar();">Ver Estadisitcas</button>
+
+    <div id="demo" class=" collapse container">
+
+        <div class="row ">
+
+            <div id="accordion">
+                <article>
+                    <h2>Sumatoria</h2>
+
+                    <p id="m_sumatoria"></p>
+
+                </article>
+                <article>
+                    <h2>Conteo</h2>
+
+                    <p id="m_conteo"></p>
+                </article>
+                <article>
+                    <h2>Promedio</h2>
+
+                    <p id="m_promedio"></p>
+
+                </article>
+                <article>
+                    <h2>Monto Mayor</h2>
+
+                    <p id="m_mayor"></p>
+
+                </article>
+                <article>
+                    <h2>Monto Menor</h2>
+
+                    <p id="m_menor"></p>
+
+                </article>
+            </div>
+            <div style="clear:both;"></div>
+
+        </div>
+    </div>
+</section>
+<br />
+<br />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        function buscar() {
+
+              var url = "@Url.Action("json_actualizar", "MóduloConsultas")";
+
+            $.post(url).done(function (data) {
+
+                for (x = 0; x < data.length; x++) {
+
+                    $("#m_menor").text(data[x].minimo);
+                    $("#m_mayor").text(data[x].maximo);
+                    $("#m_sumatoria").text(data[x].sumatoria);
+                    $("#m_promedio").text(data[x].promedio);
+                    $("#m_conteo").text(data[x].conteo);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+        }
+
+        function busqueda_alta() {
+
+            var url = "@Url.Action("json_altamedica", "MóduloConsultas")";
+
+                var buscar_altamedica = $("#buscar_altamedica").val();
+                var seleciona_altamedica = $("#seleciona_altamedica").val();
+
+                var data = { buscar_altamedica:buscar_altamedica, seleciona_altamedica:seleciona_altamedica };
+
+            $.post(url, data).done(function (data) {
+
+                 $('#tabla_Alta tbody').empty();
+
+                for (var i = 0; i < data.length; i++) {
+
+                      var rows = "<tr>"
+                + "<td>" + data[i].nombrep + "</td>"
+                 + "<td>" + data[i].fechaingreso+ "</td>"
+                 + "<td>" + data[i].fechasalida+ "</td>"
+                 + "<td>" + data[i].habitacion+ "</td>"
+                 + "<td>" + data[i].monto+ "</td>"
+                + "</tr>";
+                        $('#tabla_Alta tbody').append(rows);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+        }
+
+    </script>
+}
+
+

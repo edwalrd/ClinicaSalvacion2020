@@ -1,0 +1,119 @@
+﻿@model IEnumerable<clinicasalvacion2020.Models.Ingresos>
+
+@{
+    ViewBag.Title = "Ingresos";
+}
+
+@Styles.Render("~/Content/tabla.css")
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<h2 class="text-center"><b>Ingresos</b></h2>
+
+
+
+<section class="my-2 ">
+
+    <div class="row ">
+
+        <div class="col-sm-3 ">
+
+            <select class="form-control" id="seleciona_ingreso" name="seleciona_ingreso">
+
+                <option value="fecha">Fecha</option>
+                <option value="numero">Habitacion</option>
+            </select>
+
+
+        </div>
+        <div class="col-sm-3">
+            <input class="form-control" id="buscar_ingreso" name="buscar_ingreso" />
+
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-success" onclick="busqueda_ingreso();">Busccar</button>
+
+        </div>
+    </div>
+
+</section>
+
+<table id="tabla_ingreso" class="table table table-hover table-bordered shadow-sm p-3 mb-5 bg-white rounded table-bordered">
+    <thead class="text-center table-dark">
+
+        <tr class="filters ">
+
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pacientes.nombre)
+            </th>
+            <th>
+             Habitacion
+            </th>
+        </tr>
+
+    </thead>
+    <tbody class="text-center table-light">
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_inicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pacientes.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Habitaciones.numero)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        function busqueda_ingreso() {
+
+            var url = "@Url.Action("json_ingreso", "MóduloConsultas")";
+
+                var buscar_ingreso = $("#buscar_ingreso").val();
+                var seleciona_ingreso = $("#seleciona_ingreso").val();
+
+                var data = { buscar_ingreso:buscar_ingreso, seleciona_ingreso: seleciona_ingreso };
+
+            $.post(url, data).done(function (data) {
+
+                 $('#tabla_ingreso tbody').empty();
+
+                for (var i = 0; i < data.length; i++) {
+
+                            var rows = "<tr>"
+                + "<td>" + data[i].fecha + "</td>"
+                 + "<td>" + data[i].paciente+ "</td>"
+                 + "<td>" + data[i].numero+ "</td>"
+                + "</tr>";
+                        $('#tabla_ingreso tbody').append(rows);
+
+                }
+
+            }).fail(function (error) {
+
+                alert("se ha producido un error");
+            });
+        }
+
+
+
+
+    </script>
+}
