@@ -156,6 +156,7 @@
     <Content Include="Content\cards.css" />
     <Content Include="Content\flag-icon.css" />
     <Content Include="Content\flag-icon.min.css" />
+    <Content Include="Content\fondo.jpg" />
     <Content Include="Content\html2pdf.bundle.min.js" />
     <Content Include="Content\jquery-2.1.3.js" />
     <Content Include="Content\jquery.min.js" />

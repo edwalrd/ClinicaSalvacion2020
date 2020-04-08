@@ -196,6 +196,12 @@ img {
     border-style: none;
 }
 
+#imagen {
+
+    width: 20%;
+    height: 200px;
+}
+
 svg {
     overflow: hidden;
     vertical-align: middle;
